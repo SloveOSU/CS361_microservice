@@ -22,7 +22,7 @@
                 <a href="./about.html">About</a>
             </div>
 
-            <!-- country #1 -->
+            <!-- country #1 start -->
             <div class="col-3 border">
                 <select name="select-country-1" id="select-country-1">
                     <option selected="selected">-select-</option>
@@ -33,12 +33,15 @@
                     <option value="Zimbabwe">Zimbabe</option>
                 </select>
             </div>
+            <!-- country #1 end -->
 
+            <!-- controls start -->
             <div class="col-1 border">
                 controls
             </div>
+            <!-- controls end -->
 
-            <!-- country #2 -->
+            <!-- country #2 start -->
             <div class="col-3 border">
                 <select name="select-country-2" id="select-country-2">
                     <option selected="selected">-select-</option>
@@ -49,13 +52,13 @@
                     <option value="Zimbabwe">Zimbabe</option>
                 </select>
             </div>
+            <!-- country #2 end -->
 
+            <!-- right navigation -->
             <div class="col-3 border">
-
                 <div class="container">
-                    <a href="./about.html">Login</a>
+                    <a href="./login.html">Login</a>
                 </div>
-
             </div>
         </div>
     </div>
@@ -66,31 +69,56 @@
         <div class="row bg-white m-2 border">
             
             <!-- selection pane start -->
-            <div class="col-8 bg-white border">
-                    <div class="img-fluid">
-                        <img src="./worldmap.jpg" alt="">
-                    </div>
+            <div class="col-8 bg-white border" style="overflow: hidden;">
+                <div class="country-container" id="country-container-map" class="img-fluid">
+                    <img src="./worldmap.jpg" alt="">                                                   
+                </div>                
+                <div class="country-container" id="country-container-list" class="img-fluid" style="display:none">
+                    <ul>
+                        <li><a href="#">America</a></li>
+                        <li><a href="#">Angola</a></li>
+                        <li><a href="#">Italy</a></li>
+                        <li><a href="#">Spain</a></li>
+                        <li><a href="#">Zimbabwe</a></li>
+                    </ul>
+                </div>                
+                <span id="view-toggle" class="d-flex">
+                    <a href="#" id="view-toggle-list-btn"> 
+                        list view
+                    </a>
+                    <a href="#" id="view-toggle-map-btn" style="display:none"> 
+                        map view
+                    </a>                    
+                </span>            
             </div>
             <!-- selection pane end -->
 
             <!-- content pane start -->
-            <div class="col-4 bg-white border">
-                    <p>content pane</p>
-
-                    <div class="container border">
-                        <p>country #1 flag</p>
-                        <p>country #1 currency</p>
+            <div class="col-4 bg-white border d-flex" >
+                <div class="row">                
+                    <div class="container border align-self-center" id="sidebar-top-panel" >
+                        <h4 id="sidebar-country-1-title">country #1 title</h4>
+                        <p id="sidebar-country-1-flag">country #1 flag</p>
+                        <p id="sidebar-country-1-currency">country #1 currency</p>
                     </div>
 
-                    <div class="container border">                        
-                        <p>exchange rate</p>
+                    <div class="container border align-self-center" id="sidebar-middle-panel" >                        
+                        <div class="row d-flex">
+                            <div id="sidebar-middle-panel-left" class="col-6">
+                                <p id="sidebar-middle-country-1-title">Country 1</p>
+                            </div>
+                            <div id="sidebar-middle-panel-right" class="col-6">
+                                <p id="sidebar-middle-country-2-title">Country 2</p>
+                            </div>
+                        </div>                        
                     </div>
 
-                    <div class="container border">
-                        <p>country #2 flag</p>
-                        <p>country #2 currency</p>
+                    <div class="container border align-self-center" id="sidebar-bottom-panel" >
+                        <h4 id="sidebar-country-2-title">country #2 title</h4>
+                        <p id="sidebar-country-2-flag">country #2 flag</p>
+                        <p id="sidebar-country-2-currency">country #2 currency</p>
                     </div>
-
+                </div>
             </div>
             <!-- content pane end -->
 
@@ -114,5 +142,66 @@
      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
      <!-- Bootstrap Main -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-</body>
+
+    <!-- button controls for window/list pane -->
+    <script type="text/JavaScript">
+
+        // toggle list button
+        btn_list_view = document.getElementById("view-toggle-list-btn");
+        btn_list_view.addEventListener('click', function(e){            
+            e.preventDefault();
+            btn_map_view = document.getElementById("view-toggle-map-btn");            
+            btn_map_view.style.display = 'inline-block';
+            btn_list_view.style.display = 'none';            
+
+            document.getElementById("country-container-list").style.display = 'inline-block';
+            document.getElementById("country-container-map").style.display = 'none';
+        });
+        
+        // toggle map button
+        btn_map_view = document.getElementById("view-toggle-map-btn");
+        btn_map_view.addEventListener('click', function(e){            
+            e.preventDefault();
+            btn_list_view = document.getElementById("view-toggle-list-btn");            
+            btn_list_view.style.display = 'inline-block';            
+            btn_map_view.style.display = 'none';
+
+            document.getElementById("country-container-map").style.display = 'inline-block';
+            document.getElementById("country-container-list").style.display = 'none';
+        });
+
+
+        // Select Country Left
+        const leftCountrySelect = document.querySelector('#select-country-1');
+        leftCountrySelect.addEventListener('change', (event) => {
+                            
+            const leftCountrySelect = document.querySelector('#select-country-1');                                                
+            // update the top panel
+            country_1_title = document.querySelector('#sidebar-country-1-title');
+            country_1_title.textContent = event.target.value;
+
+            // update the middle panel
+            country_1_middle_title = document.querySelector('#sidebar-middle-country-1-title');
+            country_1_middle_title.textContent = event.target.value;
+        });
+
+
+        // Select Country Right
+        const rightCountrySelect = document.querySelector('#select-country-2');
+        rightCountrySelect.addEventListener('change', (event) => {
+                            
+            const rightCountrySelect = document.querySelector('#select-country-2');                                                
+            // update the top panel
+            country_2_title = document.querySelector('#sidebar-country-2-title');
+            country_2_title.textContent = event.target.value;
+
+            // update the middle panel
+            country_2_middle_title = document.querySelector('#sidebar-middle-country-2-title');
+            country_2_middle_title.textContent = event.target.value;
+        });        
+
+    </script>
+
+
+    </body>
 </html>
