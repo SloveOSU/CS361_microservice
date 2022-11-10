@@ -9,6 +9,7 @@
  - Technologies
  - Requirements
  - Usage
+ - Endpoints
 
 ### About:
 This is a test microservice for a school assignment. This program is a pretend home library checkout service
@@ -25,7 +26,7 @@ This microservice consists of a single endpoint that accepts a POST request cont
 A date object is then formated to represent today's date in a numeric value within range of 1 and 366.
 Calculations are then performed to determine the return date and days until return is due
 
-
+### Endpoints:
 #### /checkout POST
-Request: JSON {allowed_days_checkout : value}
-Response: JSON {date_due : value, days_left_until_return : value}
+- Request: JSON {allowed_days_checkout : value}
+- Response: JSON {date_due : value, days_left_until_return : value}
