@@ -16,4 +16,4 @@
 
 # /checkout POST
  Request: JSON {allowed_days_checkout : value}
- Response: JSON {return_date_in_days : value, days_left_until_return_due : value}
+ Response: JSON {date_due : value, days_left_until_return : value}
