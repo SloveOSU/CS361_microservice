@@ -8,6 +8,7 @@
  - Features
  - Technologies
  - Requirements
+ - UML Sequence diagram
  - Usage
  - Endpoints
  - Test requests
@@ -21,6 +22,12 @@ Maintain when loaned media assets are to be returned
 ### Technologies
 Flask web framework
 datetime library
+
+### Requirements
+- Decoding a JSON response
+
+### UML Sequence Diagram
+![Microservice UML 1 0](https://user-images.githubusercontent.com/86192388/201176391-86d69567-3f86-42d1-850b-5a28b9e6817b.png)
 
 ### Usage:
 This microservice consists of a single endpoint that accepts a POST request containing a numeric value. 
@@ -45,3 +52,4 @@ Response:
     "days_left_until_return": 5
 }
 ```
+
