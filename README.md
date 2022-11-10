@@ -2,10 +2,10 @@
  11/10/2022
  CS361 - Oregon State - Fall 2022
 
+
 # Library Checkout Microservice Content:
  - About
  - Endpoints
-
 
 
 # About:
