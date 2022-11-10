@@ -35,9 +35,9 @@ The response object includes data for the return date and the days left until me
 
 ### Test requests:
 Request: 
-'''
+```
 curl -X POST 127.0.0.1:47774/checkout -H 'Content-Type: application/json' -d '{"allowed_days_checkout":"5"}'
-'''
+```
 Response:
 ```
 {
