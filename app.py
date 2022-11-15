@@ -48,14 +48,16 @@ def login():
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
 
+    # determine if user is logged in
     if "user" in session:
         user = session["user"]
     else:
         user = None
-            
+    
+    # logout form submmitted
     if request.method == 'POST':                
 
-        # process form and store name
+        # process logout form and store name
         this_form = request.form        
         name = this_form['name']                
         
@@ -75,24 +77,50 @@ def logout():
 
     return render_template('logout.html', user=user)
 
+# todo
+# @app.route('/register')
+# def register():
+#     return render_template('register.html')
 
-@app.route('/register')
-def register():
-    return render_template('register.html')
-
-
-@app.route('/map')
-def map():
-    return render_template('map.html')    
+# todo
+# @app.route('/map')
+# def map():
+#     return render_template('map.html')    
 
 
 # # # # # # # # # # # #
-# Functions
+# Routing Functions
 #
 def get_rest_address(endpoint):
     address = 'http://localhost:'
     port = '57775'                        
     return address + port + endpoint
+
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+# Checkout Microservice API                                           #
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+
+# # # # # # # # # # # #
+#   /checkout
+# # # # # # # # # # # #
+#   This endpoint accepts a POST request containing a numeric value representing checkout length
+#   A date object is then formated to represent today in a number within 1 and 366.
+#   Calculations are then performed to determine the return date and days until return is due
+#
+@app.route('/checkout', methods=['POST'])
+def checkout():    
+    req = request.get_json()                                                        # decode JSON request object 
+    allowed_days_checkout = req['allowed_days_checkout']                            # store POST data
+    today_in_days = datetime.now().strftime("%j")                                   # format day of year for today
+    checkout_date_in_days = datetime.now().strftime("%j")                           # format datetime object to day of year
+    return_date_in_days = int(checkout_date_in_days) + int(allowed_days_checkout)   # determine return date 
+    days_left_until_return_due = int(return_date_in_days) - int(today_in_days)      # determine days until return is due    
+    return jsonify({                                                                # return data as JSON object
+        "date_due": return_date_in_days,                                                
+        "days_left_until_return" : days_left_until_return_due                           
+        }) 
 
 
 # # # # # # # # # # # #
