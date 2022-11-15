@@ -4,21 +4,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap CSS-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">    
+    <!-- CSS -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    {% block head %}    
+    <!-- start head block -->
+    {% block head %}
+
+    {% endblock head %}
+    <!-- end head block -->
     <title>
-        {% block title %}        
-        {% endblock %}
+        {% if title %}
+        
+            Project361 - {{ title }}
+        
+        {% else %}
+
+            Project361 - Title Unknown
+
+        {% endif  %}
     </title>
-    {% endblock %}
 </head>
-<body>
-    <!-- start main -->
-    {% block body %}
-    {% endblock %}    
-    <!-- end main -->
-</body>
+<body>    
+    <header>
+        <div class="container">
+            <div class="row">
+                <span class="col-6 border">
+                    <!-- image container -->
+                    <img src="{{ url_for('static', filename='img/world-map.png') }}" class="img-fluid" alt="">                    
+                </span>
+                <span class="col-6 d-flex flex-column border justify-content-evenly align-items-center">
+                    <span><a href="/home">Home</a></span>
+                    <span><a href="/login">Login</a></span>
+                    <span><a href="/logout">Logout</a></span>
+                    <span><a href="/register">Register</a></span>                                              
+                </span>
+            </div>
+        </div>
+    </header>
+    <main>                  
+        <!-- start main block -->
+        {% block maincontent  %}{% endblock maincontent %}
+        <!-- end main block -->
+    </main>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col d-flex align-items-center justify-content-evenly">
+
+                    <p>CS361</p>
+                    <p>Lovest</p>
+
+                </div>
+            </div>
+        </div>        
+    </footer>
+    <!-- bootstrap JS bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- local JS scripts -->
     <script src="{{  url_for('static', filename='js/app.js')  }}" type="text/javascript"></script>
-    {% block scripts %}
-    {% endblock  %}
-</html>
+    <!-- start scripts block -->
+    {% block scripts %}{% endblock scripts %}
+    <!-- end scripts block -->
+</body>
